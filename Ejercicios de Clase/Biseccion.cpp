@@ -9,7 +9,7 @@ int biseccion(double a, double b, double TOL, double MAX_IT);
 int main()
 {
     int cantidad;
-    cantidad = biseccion(2,-2,pow(10,-2),50);
+    cantidad = biseccion(2,-2,pow(10,-8),50);
     cout<<"La cantidad de iteraciones fueron de: "<<cantidad<<endl;
     return 0;
 }
