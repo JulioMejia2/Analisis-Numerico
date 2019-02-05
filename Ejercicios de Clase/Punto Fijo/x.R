@@ -16,7 +16,8 @@ puntoFijo = function(g,x0,tol,maxIter){
     cat("x* es aproximadamente ", x1, " con  ", k," iteraciones")
   }
 }
-g <- function(x) log(x*pi)
-curve(exp(x)-pi*x,0,4, col="blue");abline(h=0,v=0,lty=3)
-curve(log(x*pi),0,4,col="red",add=TRUE)
-puntoFijo(g,2.5,1e-9,100)
+g <- function(x) -exp(x)/pi
+z <- function(x) x
+curve(-exp(x)/pi,-2,0, col="blue");abline(h=0,v=0,lty=3)
+curve(z,-2,0,col="red",add=TRUE)
+puntoFijo(g,0.2,1e-9,100)
