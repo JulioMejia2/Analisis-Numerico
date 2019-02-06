@@ -13,11 +13,34 @@ puntoFijo = function(g,x0,tol,maxIter){
     cat("No hubo convergencia ")
     #return(NULL)
   } else{
-    cat("x* es aproximadamente ", x1, " con  ", k," iteraciones")
+    cat("x* es aproximadamente ", x1, " con  ", k-1," iteraciones\n")
   }
 }
-g <- function(x) -exp(x)/pi
+biseccion = function(f,a,b,tol,maxIter){
+k = 1
+    repeat{
+    c = (a+b)/2
+    if(abs(f(c))<tol) {
+        break
+     }
+    
+     if(f(a)*f(c)<0) b = c
+     
+     if(f(b)*f(c)<0) a = c
+         
+     if(k>maxIter) break;
+     
+     cat("x ",k,"= ",c,"\n")
+     k = k+1
+    }
+    cat("\n Con biseccion \n La raiz es aproximadamente ", c, " con  ", k-1," iteraciones")
+  
+}
+g <- function(x) exp(x)/pi
 z <- function(x) x
-curve(-exp(x)/pi,-2,0, col="blue");abline(h=0,v=0,lty=3)
-curve(z,-2,0,col="red",add=TRUE)
-puntoFijo(g,0.2,1e-9,100)
+y <- function(x) exp(x)-pi*x
+curve(exp(x)/pi,0,2, col="blue");abline(h=-0,v=0,lty=6)
+curve(z,0,2,col="red",add=TRUE)
+curve(y,0,2,col="green",add=TRUE)
+puntoFijo(g,0.5,1e-9,100)
+biseccion(y,0,2,1e-9,100)
