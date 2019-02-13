@@ -84,9 +84,13 @@ polar <- function (theta, r, color=4){
 }
 g <- function(x) 2+cos(3*x)-2+exp(x)
 curve(g,-2,2, col="blue");abline(h=-0,v=0,lty=6)
-biseccion(g,-1,0,1e-4,100)
+biseccion(g,-pi/2,0,1e-4,100)
 
 dim <- seq(-pi, pi, by=pi/300) 
 r=2+cos(3*dim)
+r1 = 2-exp(dim)
 polar(dim,r,"blue")
-newtonDN(g,-1,1e-4,10)
+par(new="TRUE")
+polar(dim,r1,"red")
+newtonDN(g,-pi/2,1e-4,10)
+
