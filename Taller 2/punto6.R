@@ -58,7 +58,7 @@ itersolveModificado <- function (A, b, x0 = NULL, nmax = 1000, tol = .Machine$do
 }
 
 #Punto 6a
-ibrary(pracma)
+library(pracma)
 beta <- 0
 alpha<-3
 A = matrix(c(2, 0, 1, beta,2 , -1,
