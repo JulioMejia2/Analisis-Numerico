@@ -1,4 +1,3 @@
-
 rm(list=ls())
 library(pracma)
 library(Matrix)
@@ -13,23 +12,23 @@ A = matrix(c(-8.1, -7, 6.123, -2,
 
 b = c(1.45,3,5.12,-4)
 
-  diago<- function(M) {
-    
-    M[col(M)!=row(M)] <- 0
-    
-    return(M)
-  }
-
+diago<- function(M) {
+  
+  M[col(M)!=row(M)] <- 0
+  
+  return(M)
+}
 
 #T = -D^-1(L + U)
-D = diago(A)
+D <-diago(A)
 D
-L = tril(A,k=-1,diag = FALSE)
+L <-tril(A,k=-1,diag = FALSE)
 L
-U = triu(A,k=1,diag = FALSE)
+U <-triu(A,k=1,diag = FALSE)
 U
-sum = L+U
-solucion = (-solve(D))
-T = round((solucion)%*%(sum),3)
+sol<- (-solve(D))
+T <- round((sol)%*%(L+U),3)
 print(T)
 print(round(norm(T,"F"),3))
+
+
