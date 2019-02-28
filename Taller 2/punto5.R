@@ -1,33 +1,55 @@
-n<-5
-c<-matrix(0,n,n+1)
-for (i in 0:n){
-  for (j in 0:(n+1)){
-    c[i,j]=floor(runif(1, min=0, max=101))
-  }
+#a
+
+be<-0
+al<-3
+
+A<-matrix(c(2, 0, 1,
+             be,2 , -1,
+             -1, 1, al), nrow=3, byrow=TRUE)
+B<-matrix (c(1,2,1),nrow=3, byrow=TRUE)
+Ab<-cbind(A,B)
+
+print(Ab)
+
+x<-0
+y<-0
+z<-0
+
+diago1 <- function(M) {
   
+  M[col(M)!=row(M)] <- 0
+  
+  return(M)
 }
-contador<-function(matriz){
-  tot<-0
-  for (i in 1:nrow(matriz)){
-    p<-matriz[i,i]
-    for (j in 1:ncol(matriz)){
-      matriz[i,j]<-matriz[i,j]/p
-      tot<-tot+1
-    }
-    for (j in 1:nrow(matriz)){
-      if(j!=i){
-        p<-matriz[j,i]
-        for (k in 1:ncol(matriz)){
-          matriz[j,k]<-matriz[j,k]-p*matriz[i,k]
-          tot<-tot+1
-        }
-        
-      }
-    }
+
+jaco<- function(A,b, x0, tol){
+  x_k<-matrix(x0)
+  
+  D<-diago1(A)
+  L<-tril(A,k=-1,diag = FALSE)
+  U<-triu(A,k=1,diag = FALSE)
+  
+  it<-1
+  repeat
+  {
+    inn = matrix(b-((L+U)%*%x_k))
+    D1 = (solve(D))
+    xk1 = D1%*%inn
+    cat("Err",it," ",norm(xk1-x_k,"F")/norm(x_k),"   ")
+    x_k = xk1
+    
+    x[[it]] = x_k[1]
+    y[[it]] = x_k[2]
+    z[[it]] = x_k[3]
+    cat("it",it," ","x ",x[[it]]," ","y ",y[[it]]," ","z ",z[[it]],"\n")
+    it = it + 1
+    
+    if(it == tol)
+      break
   }
-  print(matriz)
-  print("Numero de operaciones: ")
-  print(tot)
+  cat("Sol", tol ," it ",x_k,"\n")
 }
-print(c)
-contador(c)
+
+x1 = c(1,2,3)
+jaco(A, B, x1, 10)
+
