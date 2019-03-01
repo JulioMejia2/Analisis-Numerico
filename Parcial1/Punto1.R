@@ -1,4 +1,4 @@
-#Punto 2b
+#Punto 1b
 A <- matrix(c(4, -1, -1, -1,
              -1, 4, -1, -1,
              -1, -1, 4, -1,
@@ -29,3 +29,8 @@ nXbarra = Norm(sol2,Inf)
 #Cálculo de la variación
 variacion <- (nE/nXbarra)*100
 variacion
+
+#Cálculo de la cota
+nA <- norm(A,"I")
+cota <-(0.001/nA)*100
+cota
